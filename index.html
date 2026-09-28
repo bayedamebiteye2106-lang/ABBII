@@ -268,6 +268,10 @@ nav.tabbar .tab-badge{position:absolute;top:2px;right:22%;background:var(--orang
 .menu-list{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
 .menu-list div{padding:14px 16px;font-size:.88rem;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;cursor:pointer;}
 .menu-list div:last-child{border-bottom:none;color:var(--orange);}
+.loc-row{padding:12px 6px;font-size:.9rem;border-bottom:1px solid var(--line);cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+.loc-row:last-child{border-bottom:none;}
+.loc-row.sel{color:var(--orange);font-weight:600;}
+.sf-input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:inherit;font:inherit;font-size:.87rem;resize:vertical;}
 </style>
 </head>
 <body>
@@ -310,14 +314,22 @@ nav.tabbar .tab-badge{position:absolute;top:2px;right:22%;background:var(--orang
   <div class="head-row">
     <div class="head-left">
       <img src="data:image/webp;base64,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" alt="ABBII">
-      <div class="loc-chip"><i class="ic" data-ic="pin"></i> Dakar <i class="ic" data-ic="chevron-down"></i></div>
+      <div class="loc-chip" id="loc-chip"><i class="ic" data-ic="pin"></i> <span id="loc-label">Dakar</span> <i class="ic" data-ic="chevron-down"></i></div>
     </div>
     <div class="head-right">
-      <button class="icon-btn" aria-label="Notifications"><i class="ic" data-ic="bell"></i><span class="dot-badge">3</span></button>
+      <button class="icon-btn" aria-label="Notifications"><i class="ic" data-ic="bell"></i><span class="dot-badge" id="notif-badge" style="display:none;">0</span></button>
       <button class="icon-btn avatar" id="profile-shortcut"><i class="ic" data-ic="user" style="color:#fff;"></i></button>
     </div>
   </div>
 </header>
+
+<div class="modal-overlay" id="loc-overlay">
+  <div class="modal">
+    <button class="close-x" id="loc-close">✕</button>
+    <h2 style="font-size:1.1rem;">Choisir votre région</h2>
+    <div id="loc-list" style="margin-top:12px;display:flex;flex-direction:column;gap:2px;"></div>
+  </div>
+</div>
 
 <main>
 
@@ -361,7 +373,7 @@ nav.tabbar .tab-badge{position:absolute;top:2px;right:22%;background:var(--orang
     <div class="seller-band">
       <h3>Ouvre ta boutique sur ABBII</h3>
       <p>Ajoute tes produits, reçois des commandes et suis tes ventes depuis un tableau de bord simple.</p>
-      <button>Créer ma boutique (démo)</button>
+      <button id="open-seller-form">Créer ma boutique</button>
     </div>
   </div>
 </section>
@@ -403,13 +415,13 @@ nav.tabbar .tab-badge{position:absolute;top:2px;right:22%;background:var(--orang
         <div class="srow"><span>Livraison</span><span id="sum-delivery">2 000 FCFA</span></div>
         <div class="stotal"><span>Total</span><span id="sum-total">0 FCFA</span></div>
       </div>
-      <div class="info-row"><div class="il"><b><i class="ic" data-ic="pin"></i> Livraison à</b><span>Dakar, Sénégal</span></div><span>›</span></div>
-      <div class="info-row"><div class="il"><b><i class="ic" data-ic="credit-card"></i> Moyen de paiement</b><span>Mobile Money (Orange Money)</span></div><span>›</span></div>
+      <div class="info-row" id="cart-loc-row"><div class="il"><b><i class="ic" data-ic="pin"></i> Livraison à</b><span id="cart-loc-label">Dakar, Sénégal</span></div><span>›</span></div>
+      <div class="info-row" id="cart-pay-row"><div class="il"><b><i class="ic" data-ic="credit-card"></i> Moyen de paiement</b><span id="cart-pay-label">Wave</span></div><span>›</span></div>
       <button class="order-btn" id="checkout-btn"><i class="ic" data-ic="lock"></i> Passer la commande</button>
     </div>
 
     <div class="confirm-box" id="confirm-box">
-      <p>Commande passée ! Voici le suivi (démo — aucune commande réelle) :</p>
+      <p>Commande envoyée sur WhatsApp ! Un vendeur ABBII va confirmer votre paiement (Wave / Orange Money) et votre livraison. Suivi (aperçu) :</p>
       <div class="track-steps" id="track-steps"></div>
     </div>
   </div>
@@ -428,16 +440,17 @@ nav.tabbar .tab-badge{position:absolute;top:2px;right:22%;background:var(--orang
 <section class="view" id="view-profil">
   <div class="wrap">
     <h2 style="font-size:1.3rem;">Profil</h2>
-    <div class="profile-card">
-      <div class="av">B</div>
-      <div><div style="font-weight:600;">Biteye_pdg</div><div style="font-size:.8rem;color:var(--sub);">bayedamebiteye2106@gmail.com</div></div>
+    <div class="profile-card" id="profile-card-edit" style="cursor:pointer;">
+      <div class="av" id="profile-av">B</div>
+      <div><div style="font-weight:600;" id="profile-name-label">Biteye_pdg</div><div style="font-size:.8rem;color:var(--sub);" id="profile-email-label">bayedamebiteye2106@gmail.com</div></div>
     </div>
     <div class="menu-list">
+      <div id="menu-edit-profile">Modifier le profil <span>›</span></div>
       <div>Mes commandes <span>›</span></div>
       <div>Mes favoris <span>›</span></div>
-      <div>Adresses de livraison <span>›</span></div>
-      <div>Moyens de paiement <span>›</span></div>
-      <div>Paramètres <span>›</span></div>
+      <div id="menu-region">Région de livraison <span>›</span></div>
+      <div id="menu-payment">Moyens de paiement <span>›</span></div>
+      <div id="menu-seller">Devenir vendeur <span>›</span></div>
       <div>Se déconnecter</div>
     </div>
   </div>
@@ -506,6 +519,45 @@ nav.tabbar .tab-badge{position:absolute;top:2px;right:22%;background:var(--orang
       <div><b id="s-since"></b>membre depuis</div>
     </div>
     <p style="font-size:.85rem;color:var(--sub);margin-top:12px;">Boutique présente sur ABBII avec un catalogue suivi et des commandes régulières.</p>
+  </div>
+</div>
+
+<!-- SELLER SIGNUP FORM -->
+<div class="modal-overlay" id="seller-form-overlay">
+  <div class="modal">
+    <button class="close-x" id="seller-form-close">✕</button>
+    <h2 style="font-size:1.15rem;">Ouvrir ma boutique sur ABBII</h2>
+    <p style="font-size:.83rem;color:var(--sub);margin-top:6px;">Votre demande sera envoyée par WhatsApp à l'équipe ABBII, qui vous recontactera pour activer votre boutique.</p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px;">
+      <input type="text" id="sf-name" class="sf-input" placeholder="Nom de la boutique">
+      <input type="text" id="sf-owner" class="sf-input" placeholder="Votre nom complet">
+      <input type="tel" id="sf-phone" class="sf-input" placeholder="Numéro de téléphone">
+      <select id="sf-cat" class="sf-input"></select>
+      <textarea id="sf-desc" class="sf-input" rows="3" placeholder="Décrivez vos produits en quelques mots"></textarea>
+    </div>
+    <button class="order-btn" id="sf-submit" style="margin-top:16px;">Envoyer ma demande via WhatsApp</button>
+  </div>
+</div>
+
+<!-- PROFILE EDIT FORM -->
+<div class="modal-overlay" id="profile-edit-overlay">
+  <div class="modal">
+    <button class="close-x" id="profile-edit-close">✕</button>
+    <h2 style="font-size:1.15rem;">Modifier le profil</h2>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px;">
+      <input type="text" id="pe-name" class="sf-input" placeholder="Nom d'utilisateur">
+      <input type="email" id="pe-email" class="sf-input" placeholder="Adresse e-mail">
+    </div>
+    <button class="order-btn" id="pe-save" style="margin-top:16px;">Enregistrer</button>
+  </div>
+</div>
+
+<!-- PAYMENT METHOD PICKER -->
+<div class="modal-overlay" id="pay-overlay">
+  <div class="modal">
+    <button class="close-x" id="pay-close">✕</button>
+    <h2 style="font-size:1.1rem;">Moyen de paiement</h2>
+    <div id="pay-list" style="margin-top:12px;display:flex;flex-direction:column;gap:2px;"></div>
   </div>
 </div>
 
@@ -860,6 +912,17 @@ let searchTerm = '';
 let cart = JSON.parse(localStorage.getItem('abbii_cart') || '[]');
 let favorites = new Set(JSON.parse(localStorage.getItem('abbii_favs') || '[]'));
 
+const WHATSAPP_NUMBER = '221788402043';
+const SENEGAL_REGIONS = ['Dakar','Thiès','Diourbel','Fatick','Kaolack','Kaffrine','Kédougou','Kolda','Louga','Matam','Saint-Louis','Sédhiou','Tambacounda','Ziguinchor'];
+const PAYMENT_METHODS = [
+  {id:'wave', name:'Wave', sub:'Paiement au ' + '77 84 02 043'},
+  {id:'om', name:'Orange Money', sub:'Paiement au ' + '77 84 02 043'},
+  {id:'cod', name:'Paiement à la livraison', sub:'Espèces à la réception'},
+];
+let selectedRegion = localStorage.getItem('abbii_region') || 'Dakar';
+let selectedPayment = localStorage.getItem('abbii_payment') || 'wave';
+let profile = JSON.parse(localStorage.getItem('abbii_profile') || 'null') || {name:'Biteye_pdg', email:'bayedamebiteye2106@gmail.com'};
+
 function fmt(n){ return n.toLocaleString('fr-FR') + ' FCFA'; }
 function saveCart(){ try{ localStorage.setItem('abbii_cart', JSON.stringify(cart)); }catch(e){} }
 function saveFavs(){ try{ localStorage.setItem('abbii_favs', JSON.stringify([...favorites])); }catch(e){} }
@@ -1093,6 +1156,7 @@ function renderCart(){
   document.getElementById('sum-delivery').textContent = fmt(delivery);
   document.getElementById('sum-total').textContent = fmt(subtotal + delivery);
   renderCartBadge();
+  updateCartInfoLabels();
 }
 document.getElementById('cart-items').addEventListener('click', e => {
   const inc = e.target.getAttribute('data-inc');
@@ -1104,15 +1168,130 @@ document.getElementById('cart-items').addEventListener('click', e => {
 });
 document.getElementById('clear-cart').addEventListener('click', () => { cart = []; saveCart(); renderCart(); document.getElementById('confirm-box').classList.remove('show'); });
 
-const TRACK_LABELS = ['Commande passée','Paiement confirmé','Préparation','Remise au livreur','En livraison','Livrée'];
+function buildOrderMessage(){
+  const counts = {};
+  cart.forEach(c => counts[c.id] = (counts[c.id]||0)+1);
+  let subtotal = 0;
+  const lines = [];
+  Object.keys(counts).forEach(id => {
+    const p = PRODUCTS.find(x => x.id === id);
+    if(!p) return;
+    const qty = counts[id];
+    subtotal += p.price * qty;
+    lines.push('• ' + p.name + ' x' + qty + ' — ' + fmt(p.price * qty));
+  });
+  const delivery = 2000;
+  const pm = PAYMENT_METHODS.find(p => p.id === selectedPayment);
+  return 'Bonjour ABBII, je souhaite passer une commande :\n\n' + lines.join('\n') +
+    '\n\nSous-total : ' + fmt(subtotal) + '\nLivraison : ' + fmt(delivery) + '\nTotal : ' + fmt(subtotal + delivery) +
+    '\n\nLivraison à : ' + selectedRegion + ', Sénégal' + '\nPaiement : ' + (pm ? pm.name : 'Wave') +
+    '\n\nClient : ' + profile.name;
+}
+
+const TRACK_LABELS = ['Commande envoyée sur WhatsApp','Paiement confirmé','Préparation','Remise au livreur','En livraison','Livrée'];
 document.getElementById('checkout-btn').addEventListener('click', () => {
+  if(cart.length === 0) return;
+  const text = buildOrderMessage();
+  window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text), '_blank');
   const wrap = document.getElementById('track-steps');
   wrap.innerHTML = TRACK_LABELS.map(l => `<div class="track-step"><div class="track-dot"></div><span>${l}</span></div>`).join('');
   document.getElementById('confirm-box').classList.add('show');
   const steps = wrap.querySelectorAll('.track-step');
   steps.forEach((s, i) => setTimeout(() => s.classList.add('done'), 300 * (i + 1)));
+  steps[0].classList.add('done');
   cart = []; saveCart();
   setTimeout(() => { renderCart(); }, 900);
+});
+
+/* ---------- region, payment, profile, seller signup ---------- */
+function updateCartInfoLabels(){
+  const locLabel = document.getElementById('cart-loc-label');
+  const payLabel = document.getElementById('cart-pay-label');
+  if(locLabel) locLabel.textContent = selectedRegion + ', Sénégal';
+  if(payLabel){ const pm = PAYMENT_METHODS.find(p => p.id === selectedPayment); payLabel.textContent = pm ? pm.name : 'Wave'; }
+}
+function renderLocList(){
+  const wrap = document.getElementById('loc-list');
+  wrap.innerHTML = SENEGAL_REGIONS.map(r => `<div class="loc-row${r===selectedRegion?' sel':''}" data-region="${r}">${r}</div>`).join('');
+}
+function openLocPicker(){ renderLocList(); document.getElementById('loc-overlay').classList.add('open'); }
+document.getElementById('loc-chip').addEventListener('click', openLocPicker);
+document.getElementById('loc-close').addEventListener('click', () => document.getElementById('loc-overlay').classList.remove('open'));
+document.getElementById('loc-overlay').addEventListener('click', e => { if(e.target.id === 'loc-overlay') document.getElementById('loc-overlay').classList.remove('open'); });
+document.getElementById('loc-list').addEventListener('click', e => {
+  const r = e.target.getAttribute('data-region');
+  if(!r) return;
+  selectedRegion = r;
+  try{ localStorage.setItem('abbii_region', r); }catch(err){}
+  document.getElementById('loc-label').textContent = r;
+  updateCartInfoLabels();
+  document.getElementById('loc-overlay').classList.remove('open');
+});
+
+function renderPayList(){
+  const wrap = document.getElementById('pay-list');
+  wrap.innerHTML = PAYMENT_METHODS.map(p => `<div class="loc-row${p.id===selectedPayment?' sel':''}" data-pay="${p.id}"><span>${p.name}<br><span style="font-size:.72rem;color:var(--sub);font-weight:400;">${p.sub}</span></span></div>`).join('');
+}
+document.getElementById('cart-pay-row').addEventListener('click', () => { renderPayList(); document.getElementById('pay-overlay').classList.add('open'); });
+document.getElementById('menu-payment').addEventListener('click', () => { showView('cart'); renderPayList(); document.getElementById('pay-overlay').classList.add('open'); });
+document.getElementById('pay-close').addEventListener('click', () => document.getElementById('pay-overlay').classList.remove('open'));
+document.getElementById('pay-overlay').addEventListener('click', e => { if(e.target.id === 'pay-overlay') document.getElementById('pay-overlay').classList.remove('open'); });
+document.getElementById('pay-list').addEventListener('click', e => {
+  const row = e.target.closest('[data-pay]');
+  if(!row) return;
+  selectedPayment = row.getAttribute('data-pay');
+  try{ localStorage.setItem('abbii_payment', selectedPayment); }catch(err){}
+  updateCartInfoLabels();
+  document.getElementById('pay-overlay').classList.remove('open');
+});
+document.getElementById('cart-loc-row').addEventListener('click', openLocPicker);
+document.getElementById('menu-region').addEventListener('click', openLocPicker);
+
+function renderProfile(){
+  document.getElementById('profile-name-label').textContent = profile.name;
+  document.getElementById('profile-email-label').textContent = profile.email;
+  document.getElementById('profile-av').textContent = (profile.name || '?').charAt(0).toUpperCase();
+}
+function openProfileEdit(){
+  document.getElementById('pe-name').value = profile.name;
+  document.getElementById('pe-email').value = profile.email;
+  document.getElementById('profile-edit-overlay').classList.add('open');
+}
+document.getElementById('profile-card-edit').addEventListener('click', openProfileEdit);
+document.getElementById('menu-edit-profile').addEventListener('click', openProfileEdit);
+document.getElementById('profile-edit-close').addEventListener('click', () => document.getElementById('profile-edit-overlay').classList.remove('open'));
+document.getElementById('profile-edit-overlay').addEventListener('click', e => { if(e.target.id === 'profile-edit-overlay') document.getElementById('profile-edit-overlay').classList.remove('open'); });
+document.getElementById('pe-save').addEventListener('click', () => {
+  const name = document.getElementById('pe-name').value.trim();
+  const email = document.getElementById('pe-email').value.trim();
+  if(name) profile.name = name;
+  if(email) profile.email = email;
+  try{ localStorage.setItem('abbii_profile', JSON.stringify(profile)); }catch(err){}
+  renderProfile();
+  document.getElementById('profile-edit-overlay').classList.remove('open');
+});
+
+function openSellerForm(){
+  const sel = document.getElementById('sf-cat');
+  sel.innerHTML = CATEGORIES.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+  document.getElementById('seller-form-overlay').classList.add('open');
+}
+document.getElementById('open-seller-form').addEventListener('click', openSellerForm);
+document.getElementById('menu-seller').addEventListener('click', openSellerForm);
+document.getElementById('seller-form-close').addEventListener('click', () => document.getElementById('seller-form-overlay').classList.remove('open'));
+document.getElementById('seller-form-overlay').addEventListener('click', e => { if(e.target.id === 'seller-form-overlay') document.getElementById('seller-form-overlay').classList.remove('open'); });
+document.getElementById('sf-submit').addEventListener('click', () => {
+  const name = document.getElementById('sf-name').value.trim();
+  const owner = document.getElementById('sf-owner').value.trim();
+  const phone = document.getElementById('sf-phone').value.trim();
+  const cat = document.getElementById('sf-cat').value;
+  const desc = document.getElementById('sf-desc').value.trim();
+  if(!name || !owner || !phone){ alert('Merci de renseigner au moins le nom de la boutique, votre nom et votre téléphone.'); return; }
+  const text = 'Bonjour ABBII, je souhaite ouvrir une boutique vendeur :\n\n' +
+    'Boutique : ' + name + '\nResponsable : ' + owner + '\nTéléphone : ' + phone +
+    '\nCatégorie principale : ' + cat + (desc ? ('\nDescription : ' + desc) : '');
+  window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text), '_blank');
+  document.getElementById('seller-form-overlay').classList.remove('open');
 });
 
 /* ---------- splash ---------- */
@@ -1135,6 +1314,8 @@ renderCatIconRow();
 renderCatGrid();
 renderProducts();
 renderCart();
+document.getElementById('loc-label').textContent = selectedRegion;
+renderProfile();
 </script>
 </body>
 </html>
